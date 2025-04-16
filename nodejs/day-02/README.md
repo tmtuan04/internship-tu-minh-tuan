@@ -518,7 +518,7 @@ async function archiveLogs(logFiles) {
 
   const archiveStream = require("stream").PassThrough();
 
-  // Tạo stream đọc lần lượt các log
+  // Tạo stream đọc lần lượt các log  
   (async () => {
     for (const file of logFiles) {
       const filePath = path.join(logsDir, file);
