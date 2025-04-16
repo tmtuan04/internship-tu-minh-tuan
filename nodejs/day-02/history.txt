@@ -1,0 +1,3 @@
+sayHi()
+now()
+sum(2, 3)
