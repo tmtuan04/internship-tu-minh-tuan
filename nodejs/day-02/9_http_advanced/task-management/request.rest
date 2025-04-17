@@ -1,0 +1,30 @@
+### Tạo task mới
+POST http://localhost:3000/tasks
+Authorization: Bearer mysecrettoken
+Content-Type: application/json
+
+{
+  "title": "Bai 1 Node.js",
+  "deadline": "2025-04-16T23:59:00"
+}
+
+### Lấy tất cả tasks
+GET http://localhost:3000/tasks
+Authorization: Bearer mysecrettoken
+
+### Lấy task theo ID
+GET http://localhost:3000/tasks/2
+Authorization: Bearer mysecrettoken
+
+### Cập nhật task
+PUT http://localhost:3000/tasks/2
+Authorization: Bearer mysecrettoken
+Content-Type: application/json
+
+{
+  "status": "done"
+}
+
+### Xoá task
+DELETE http://localhost:3000/tasks/2
+Authorization: Bearer mysecrettoken

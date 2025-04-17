@@ -1,16 +1,18 @@
 {
-  "name": "slugify-cli",
+  "name": "error-handling-app",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
-  "bin": {
-    "slugify-cli": "./bin/index.js"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "error-handling-app": "file:",
+    "express": "^5.1.0"
+  }
 }

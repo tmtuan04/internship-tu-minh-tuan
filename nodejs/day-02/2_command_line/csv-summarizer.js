@@ -38,7 +38,7 @@ headers.forEach((header, index) => {
     });
   }
 });
-console.log(summary)
+console.log(summary);
 // In bảng kết quả (Tham khảo từ ChatGPT)
 console.log("\nSummary of Numeric Columns\n");
 console.log("+----------------+------------+------------+");
