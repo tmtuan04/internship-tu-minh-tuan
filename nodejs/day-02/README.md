@@ -32,6 +32,7 @@ Khi nhấn `Tab` 2 lần:
 2. Tạo một file `repl_helper.js` khởi chạy custom REPL:
 - Gợi ý (autocomplete) các lệnh tự tạo: `sayHi`, `now`, `sum(a,b)`
 - Khi gõ `.save` thì lưu lịch sử REPL vào file `history.txt`
+- Chạy code: cd vào folder `REPL` + `node repl_helper`
 ```
 // repl_helper.js
 // Custom REPL
@@ -117,7 +118,7 @@ Cách dùng `readline`:
 - Sự kiện line và close: Dùng để xử lý dòng được nhập và kết thúc chương trình. 
 
 **Bài tập**
-1. Viết file `sum.js` tính tổng 2 số từ dòng lệnh.
+1. Viết file `sum.js` tính tổng 2 số từ dòng lệnh. (Chạy code `node sum.js 1 2`, với 1 và 2 là đối số truyền vào)
 ```
 // sum.js
 const a = Number(process.argv[2]);
@@ -128,7 +129,7 @@ console.log(`Tong cua ${a} va ${b} la: ${a + b}`);
 Kết quả:
 ![](screenshots/6.png)
 
-2. Dùng `readline` hỏi tên và in ra `Hello <tên>`.
+2. Dùng `readline` hỏi tên và in ra `Hello <tên>`. (`node hello.js`)
 ```
 // hello.js
 const readline = require('readline');
@@ -146,7 +147,7 @@ rl.question('Nhap ten cua ban: ', (name) => {
 Kết quả
 ![](screenshots/7.png)
 
-3. Bài tập nâng cao
+3. Bài tập nâng cao (`node csv-summarizer.js data.csv`)
 ```
 // csv-summarizer.js
 const fs = require("fs");
@@ -243,6 +244,10 @@ Tác dụng chính:
 1. Bài tập nhỏ: Tạo `package.json`, cài `chalk`, in dòng màu, tạo script hello-cli gọi bằng npx.
 `package.json`:
 
+- cd vào folder `hello-cli`
+- `npm i`
+- `npx hello-cli`
+
 `hello.js`:
 ```
 #!/usr/bin/env node
@@ -255,6 +260,10 @@ console.log(chalk.blue.bold('This text is blue and bold.'));
 console.log(chalk.red('Let\'s go!'));
 ```
 2. Bài tập nâng cao (folder slugify-cli)
+- cd vào folder `slugify-cli`
+- `npm i`
+- `npx slugify-cli Từ Minh Tuân` (Đối số thứ 3 thay bằng chuỗi tuỳ chỉnh)
+
 ```
 // bin/index.js
 
@@ -334,9 +343,10 @@ Khi nào dùng `setImmediate()`:
 >`Ưu tiên: process.nextTick() (Trước bất kỳ task bất đồng bộ nào) > setImmediate() (	Sau I/O, trước setTimeout)> setTimeout(fn, 0)`
 
 **Bài tập**
-1. Viết đoạn code so sánh thứ tự log của nextTick, setTimeout, setImmediate
+1. Viết đoạn code so sánh thứ tự log của `nextTick`, `setTimeout`, `setImmediate`
+(`node eventLoop.js`)
 ```
-// event
+// eventLoop.js
 console.log('Start');
 
 setTimeout(() => {
@@ -362,6 +372,7 @@ Kết quả:
 - Mỗi lần chạy sẽ tạo 100 setTimeout(fn, 0), setImmediate, process.nextTick.
 - Ghi lại thứ tự thực thi và tổng thời gian mất bao lâu.
 - Bonus: Cho phép config số vòng lặp bằng tham số dòng lệnh.
+- Chạy code: `node execetion-timing 5`, với 5 là số lần lặp nếu không chỉ định thì mặc định là 100.
 
 ```
 // execution-timing.js
@@ -405,7 +416,7 @@ for (let i = 0; i < iterations; i++) {
 Kết quả:
 ![](screenshots/12.png)
 
-Nhận xét: `setTimeout` và `setImmediate` không đảm bảo thứ tự tuyệt đối nếu không có I/O blocking.
+Nhận xét: `setTimeout` và `setImmediate` **không đảm bảo thứ tự tuyệt đối** nếu không có I/O blocking.
 
 ## 5. Phần 33-40: fs, path, os
 **Câu 1**: `fs.readFileSync()` vs `fs.readFile()`
@@ -425,7 +436,7 @@ console.log(fullPath);
 Trả về sẽ có dạng: `C:\project\data\file.txt`
 
 **Câu 3**: Dùng `os.totalmem()` để làm gì?
-Trả về **tổng dung lượng RAM vật lý** (tính bằng byte) của máy tính bạn đang chạy.
+Trả về **tổng dung lượng RAM vật lý** (tính bằng byte) của máy tính bạn đang chạy. (`node os.js`)
 ```
 // os.js
 const os = require('os');
@@ -435,7 +446,7 @@ Kết quả:
 ![](screenshots/13.png)
 
 **Bài tập**:
-1. Viết script ghi `log.txt` với dòng Hello at <timestamp>.
+1. Viết script ghi `log.txt` với dòng Hello at <timestamp>. (`node write-log.js`)
 ```
 // write-log.js
 const fs = require("fs");
@@ -454,13 +465,14 @@ Kết quả:
 Hello at 2025-04-16T08:42:05.861Z
 ```
 
-2. Viết công cụ log-archiver.js:
+2. Viết công cụ `log-archiver.js`:
 - Lấy tất cả file .log trong thư mục /logs
 - Đổi tên theo format log_YYYYMMDD_HHMM.log
 - Nén các log này thành .zip → /archives
+- Chạy code: `node log-archiver`
 
 ```
-log-archiver/log-archiver.js
+// log-archiver/log-archiver.js
 
 const fs = require("fs/promises"); // Dùng promise-based API để làm việc với file
 const fss = require("fs"); // Dùng để tạo stream (read/write stream)
@@ -562,7 +574,7 @@ Kết quả:
 - Sự kiện `eventName` chỉ được gọi **một lần duy nhất**
 - Cách hoạt động: Listener sẽ được gọi **chỉ lần đầu tiên**, sau đó listener này tự động gỡ bỏ (Chat app, Socket,..)
 - Dùng khi muốn xử lý sự kiện một lần duy nhất, ví dụ: khởi tạo, xác thực một lần hoặc sự kiện chỉ xảy ra đúng 1 lần trong vòng đời chương trình (kết nối db, ..)
-
+- `node event-emitter.js`
 ```
 // event-emitter.js
 const EventEmitter = require('events');
@@ -590,7 +602,8 @@ Kết quả:
 ![](screenshots/15.png)
 
 **Câu 2**: Tạo server đơn giản bằng `http.createServer()?`
-- `http-server`: Tạo máy chủ HTTP
+- `http`: Tạo máy chủ HTTP
+- `node http-server.js`
 ```
 // http-server.js
 const http = require('http');
@@ -609,6 +622,7 @@ Kết quả:
 ![alt text](screenshots/16.png)
 
 **Câu 3**: `Cách dùng http.request()?`
+`node  http-request.js`
 ```
 // http-request.js
 const http = require("http");
@@ -649,9 +663,11 @@ Kết quả:
 
 **Bài tập**:
 
-1. Viết EventEmitter custom → log khi event xảy ra + Server đơn giản `/hello` trả về chuỗi.
+1. Viết `EventEmitter` custom → log khi event xảy ra + Server đơn giản `/hello` trả về chuỗi.
 
 > File .log (log file) thường được sử dụng để ghi lại thông tin hoạt động (logs) của hệ thống, ứng dụng, hoặc server. Đây là một phần rất quan trọng trong việc theo dõi và bảo trì ứng dụng. `Ví dụ: [2025-04-17T10:21:00Z] ERROR: Cannot connect to database!`
+
+Chạy code: `node customEventEmitter.js`
 
 ```
 // customEventEmitter.js
@@ -694,6 +710,12 @@ Kết quả:
 2. Viết HTTP server **không dùng Express**:
 - Route `POST /upload` nhận file bằng multipart/form-data (gợi ý dùng `busboy`)
 - Khi upload xong, emit sự kiện `upload:done`, ghi log lại vào file `uploads.log`.
+
+Chạy project:
+- cd `upload-server`
+- `npm i`
+- Chạy lệnh `curl -F "file=@test.txt" http://localhost:3000/upload`
+
 ```
 // upload-server/server.js
 const http = require("http");
@@ -774,9 +796,9 @@ Stream mang lại nhiều ưu điểm trong Node.js, đặc biệt khi xử lý 
 
 **Câu 2**: `pipe()` làm gì?
 Phương thức `.pipe()` dùng để **nối các stream lại với nhau**. Nó giúp chuyển dữ liệu đầu ra của stream này làm đầu vào cho các stream khác.
-Ví dụ:
+Ví dụ: (`node index.js`)
 ```
-// stream/index.js
+// index.js
 const fs = require('fs');
 
 const readStream = fs.createReadStream('input.txt');
@@ -794,9 +816,9 @@ Node.js có 4 loại stream chính:
 - Transform - Giống Duplex, nhưng có thể biến đổi dữ liệu trong quá trình Stream (nén file, mã hoá, ...)
 
 **Bài tập**:
-1. Đọc input.txt → ghi output.txt bằng stream.
+1. Đọc `input.txt` → ghi `output.txt` bằng stream. (`node index.js`)
 ```
-// stream/index.js
+// index.js
 const fs = require('fs');
 
 const readStream = fs.createReadStream('input.txt');
@@ -805,12 +827,12 @@ const writeStream = fs.createWriteStream('output.txt');
 readStream.pipe(writeStream);
 ```
 2. Viết công cụ thay thế chuỗi trong file lớn:
-- Đọc file lớn bằng stream (fs.createReadStream)
+- Đọc file lớn bằng stream (`fs.createReadStream`)
 - Thay thế "ERROR" thành "⚠️ Warning" và ghi lại vào file mới
 - Yêu cầu: xử lý file >100MB mượt mà.
-
+- `node replaceStream.js`
 ```
-// stream//replaceStream.js
+// replaceStream.js
 const fs = require("fs");
 const { Transform } = require("stream");
 
@@ -883,7 +905,7 @@ Khi Node.js gặp lỗi không được bắt (uncaught error), áp sẽ **crash
 Ngoài ra: Không nên tiếp tục chạy ứng dụng sau `uncaughtException` vì có thể hệ thống đã rơi vào trạng thái không an toàn.
 
 **Bài tâp**:
-1. Viết đoạn code chia cho 0 và bắt lỗi.
+1. Viết đoạn code chia cho 0 và bắt lỗi. (`node Bai1.js`)
 ```
 // Bai1.js
 function divide(a, b) {
@@ -907,6 +929,12 @@ Kết quả:
 - Tự bắt lỗi 404, 500
 - Log lỗi vào file error.log
 - Trả response JSON tùy theo môi trường (dev vs prod)
+
+Chạy code:
+- `cd error-handling-app`
+- `npm i`
+- `node index.js`
+- Truy cập vào các route `/crash` và `/ bất kỳ` để test
 
 ```
 import express from "express";
@@ -991,6 +1019,13 @@ Trong Express: `res` là mở rộng từ `http.ServerResponse`
 
 **Bài tập**:
 1. Tạo server Express có route GET /, POST /data lưu data vào mảng.
+
+Chạy code:
+- cd `Bai1`
+- `npm i`
+- `node index.js`
+- Test tương tự như dưới ảnh `request.rest` bên dưới.
+
 ```
 // Bai1/index.js
 import express from "express";
@@ -1028,6 +1063,11 @@ Kết quả:
 - Mỗi task có deadline, status
 - Tự động kiểm tra deadline quá hạn, chuyển status → "overdue"
 - Dùng middleware kiểm tra auth token (giả lập).
+
+Chạy code:
+- cd `task-management`
+- `npm i`
+- `node index.js`
 
 ```
 Cấu trúc thư mục dự án:
