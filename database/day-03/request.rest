@@ -1,5 +1,6 @@
 ### - Get all products
 GET http://localhost:3000/products
+Authorization: Bearer token123
 
 ### - Create a new product
 POST http://localhost:3000/products

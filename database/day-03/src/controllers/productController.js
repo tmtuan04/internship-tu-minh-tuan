@@ -1,4 +1,4 @@
-import db from "../db.js";
+import db from "../config/db.js";
 
 export const getAllProducts = (req, res) => {
   db.query("SELECT * FROM products", (err, results) => {
