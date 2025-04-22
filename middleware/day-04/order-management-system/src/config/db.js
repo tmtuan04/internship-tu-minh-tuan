@@ -9,6 +9,6 @@ const db = mysql.createPool({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
 });
-console.log("Database connected successfully");
+console.log("Database connected successfully!");
 
 export default db;

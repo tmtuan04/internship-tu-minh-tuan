@@ -2,7 +2,6 @@ import dotenv from "dotenv";
 import db from "../config/db.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../lib/utils.js";
-import e from "express";
 
 dotenv.config();
 
