@@ -1,5 +1,5 @@
 {
-  "name": "react-cart",
+  "name": "product-cart-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.4",
+    "product-cart-app": "file:",
     "react": "^19.0.0",
-    "react-cart": "file:",
     "react-dom": "^19.0.0",
     "tailwindcss": "^4.1.4"
   },
