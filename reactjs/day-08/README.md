@@ -1,4 +1,4 @@
-# Giải thích Day6
+# Giải thích Day7 + Day8
 
 Nội dung lý thuyết:
 - Giới thiệu SPA, Router dom v6

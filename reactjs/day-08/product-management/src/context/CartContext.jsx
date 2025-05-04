@@ -1,17 +1,16 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import { CartContext } from "./useCart";
+import { cartReducer, initialCartState } from "./cartReducer";
 
-// children là một props đặc biệt trong React, đại diện cho nội dung con được bao bọc bên trong component.
-// Đây là pattern phổ biến khi dùng Context API trong React.
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+  const [cart, dispatch] = useReducer(cartReducer, initialCartState);
 
   const addToCart = (product) => {
-    setCart((prev) => [...prev, product]);
+    dispatch({ type: "ADD_TO_CART", payload: product });
   };
 
   const removeFromCart = (id) => {
-    setCart((prev) => prev.filter((item, index) => item.id !== id || index !== prev.findIndex(p => p.id === id)));
+    dispatch({ type: "REMOVE_FROM_CART", payload: id });
   };
 
   return (
