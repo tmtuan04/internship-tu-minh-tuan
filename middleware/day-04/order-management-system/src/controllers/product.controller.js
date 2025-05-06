@@ -1,5 +1,5 @@
-import e from "express";
 import db from "../config/db.js";
+import { uploadBase64Image } from "../lib/upload.js";
 
 export const getAllProducts = async (req, res) => {
   try {
@@ -13,14 +13,14 @@ export const getAllProducts = async (req, res) => {
     let countQuery = "SELECT COUNT(*) as total FROM products WHERE 1=1";
     const queryParams = [];
 
-    // Name filter (Tương đối)
+    // Filter: name (Tương đối)
     if (name) {
       query += " AND name LIKE ?";
       countQuery += " AND name LIKE ?";
       queryParams.push(`%${name}%`);
     }
 
-    // Category filter (chính xác)
+    // Filter: category (Tuyệt đối)
     if (category) {
       query += " AND category = ?";
       countQuery += " AND category = ?";
@@ -55,12 +55,16 @@ export const getAllProducts = async (req, res) => {
 };
 
 export const createProduct = async (req, res) => {
-  const { name, price, stock, description, category } = req.body;
+  const { name, price, stock, description, category, image } = req.body;
 
   try {
+    if (!image) throw new Error("Image is required");
+
+    const imageUrl = await uploadBase64Image(image);
+
     const [result] = await db.query(
-      "INSERT INTO products (name, price, stock, description, category) VALUES (?, ?, ?, ?, ?)",
-      [name, price, stock, description, category]
+      "INSERT INTO products (name, price, stock, description, category, image) VALUES (?, ?, ?, ?, ?, ?)",
+      [name, price, stock, description, category, imageUrl]
     );
     const newProductId = result.insertId;
 
@@ -77,22 +81,37 @@ export const createProduct = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).json({ message: "Internal Server Error" });
   }
-}
+};
 
 export const updateProduct = async (req, res) => {
+  console.log(req.body);
   const { id } = req.params;
-  const { name, price, stock, description, category } = req.body;
-
+  const { name, price, stock, description, category, image } = req.body;
   try {
+    let imageUrl;
+
+    // Nếu người dùng gửi ảnh mới (base64), thì upload lại
+    if (image && image.startsWith("data:image/")) {
+      imageUrl = await uploadBase64Image(image);
+    }
+
+    // Nếu không gửi ảnh mới thì không thay đổi ảnh
     const [result] = await db.query(
-      "UPDATE products SET name = ?, price = ?, stock = ?, description = ?, category = ? WHERE id = ?",
-      [name, price, stock, description, category, id]
+      `
+        UPDATE products 
+        SET name = ?, price = ?, stock = ?, description = ?, category = ?
+        ${imageUrl ? ', image = ?' : ''}
+        WHERE id = ?
+      `,
+      imageUrl
+        ? [name, price, stock, description, category, imageUrl, id]
+        : [name, price, stock, description, category, id]
     );
 
     if (result.affectedRows === 0) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: "Product not found" });
     }
 
     res.status(200).json({
@@ -104,25 +123,23 @@ export const updateProduct = async (req, res) => {
         stock,
         description,
         category,
+        ...(imageUrl && { image: imageUrl }),
       },
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).json({ message: "Internal Server Error" });
   }
-}
+};
 
 export const deleteProduct = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const [result] = await db.query(
-      "DELETE FROM products WHERE id = ?",
-      [id]
-    );
+    const [result] = await db.query("DELETE FROM products WHERE id = ?", [id]);
 
     if (result.affectedRows === 0) {
-      return res.status(404).json({ message: 'Product not found' });
+      return res.status(404).json({ message: "Product not found" });
     }
 
     res.status(200).json({
@@ -130,6 +147,6 @@ export const deleteProduct = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).json({ message: "Internal Server Error" });
   }
-}
+};

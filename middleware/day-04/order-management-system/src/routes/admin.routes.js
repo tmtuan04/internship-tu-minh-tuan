@@ -13,11 +13,12 @@ router.get("/users", authenticateToken, isAdmin, getAllUsers);
 router.patch("/users/:id/lock", authenticateToken, isAdmin, lockUser);
 
 // Product
-router.post("/products", authenticateToken, isAdmin, validateProduct, createProduct);
+// Tạm thời xoá middleware: authenticateToken, isAdmin
+router.post("/products", validateProduct, createProduct);
 
-router.put("/products/:id", authenticateToken, isAdmin, validateProduct, updateProduct);
+router.put("/products/:id", updateProduct);
 
-router.delete("/products/:id", authenticateToken, isAdmin, deleteProduct);
+router.delete("/products/:id", deleteProduct);
 
 // Order
 router.get("/orders", authenticateToken, isAdmin, getOrders);
