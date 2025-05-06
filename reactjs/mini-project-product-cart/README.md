@@ -1,54 +1,44 @@
-# React + TypeScript + Vite
+# 🛍️ TuanStore - Ứng dụng Quản lý và Mua sắm Sản phẩm
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🧾 Giới thiệu
 
-Currently, two official plugins are available:
+**TuanStore** là một ứng dụng web đơn giản cho phép người dùng:
+- Duyệt và tìm kiếm sản phẩm.
+- Thêm sản phẩm vào giỏ hàng.
+- Cập nhật số lượng và xóa sản phẩm khỏi giỏ hàng.
+- Giao diện đẹp, trực quan với Ant Design.
+- Toast thông báo cho các hành động quan trọng.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Ứng dụng sử dụng **React + TypeScript + Ant Design** ở frontend, kết nối với một **API Node.js** ở backend để lấy dữ liệu sản phẩm.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Chức năng chính
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 🔍 Trang Sản phẩm (`/products`)
+- Cho phép thêm, sửa, xoá, cập nhật sản phẩm.
+- Hiển thị danh sách sản phẩm theo trang (pagination).
+- Cho phép tìm kiếm sản phẩm theo tên.
+- Mỗi sản phẩm có nút **“Thêm vào giỏ hàng”**.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 🛒 Giỏ hàng (`/cart`)
+- Hiển thị các sản phẩm đã thêm vào giỏ.
+- Cho phép cập nhật số lượng hoặc xóa sản phẩm.
+- Modal xác nhận khi xóa sản phẩm.
+- Hiển thị tổng tiền.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 🌐 Trang chủ (`/`)
+- Giao diện chào mừng.
+- Nút chuyển đến danh sách sản phẩm và giỏ hàng.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+## 🛠️ Công nghệ sử dụng
+
+- **React** + **TypeScript**
+- **React Router**
+- **Tailwind CSS**
+- **Ant Design** (UI components)
+- **React Context** cho quản lý giỏ hàng
+- **axios** để gọi API
+- **react-hot-toast** cho thông báo
