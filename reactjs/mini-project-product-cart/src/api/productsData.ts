@@ -1,12 +1,6 @@
 import axios from "axios";
 import { ProductResponse } from "../types/productTypes";
-
-type ProductQueryParams = {
-  page: number;
-  limit: number;
-  name?: string;
-  category?: string;
-};
+import type { ProductQueryParams } from "../types/productTypes";
 
 export async function fetchProducts(
   page: number = 1,

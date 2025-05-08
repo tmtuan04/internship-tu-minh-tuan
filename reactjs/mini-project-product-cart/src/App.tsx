@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import { Toaster } from "react-hot-toast"; // Import ToastContainer
-
 import './App.css'
 
 import { HomePage } from './pages/HomePage'

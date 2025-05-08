@@ -28,6 +28,8 @@ export const ProductPage = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [imageBase64, setImageBase64] = useState<string | null>(null);
     const [editingProduct, setEditingProduct] = useState<Products | null>(null);
+    const [submitting, setSubmitting] = useState(false);
+
 
     const [form] = Form.useForm();
 
@@ -57,12 +59,13 @@ export const ProductPage = () => {
     };
 
     const handleFormSubmit = async (values: ProductInput) => {
-        try {
-            if (!imageBase64) {
-                showToast("Vui lòng tải ảnh lên", "error");
-                return;
-            }
+        if (!imageBase64) {
+            showToast("Vui lòng tải ảnh lên", "error");
+            return;
+        }
 
+        setSubmitting(true);
+        try {
             const payload = { ...values, image: imageBase64 };
 
             if (editingProduct) {
@@ -80,6 +83,8 @@ export const ProductPage = () => {
             loadProducts();
         } catch (error) {
             showToast((error as Error).message, "error");
+        } finally {
+            setSubmitting(false);
         }
     };
 
@@ -224,44 +229,59 @@ export const ProductPage = () => {
                 okText={editingProduct ? "Lưu" : "Tạo"}
                 cancelText="Hủy"
             >
-                <Form layout="vertical" form={form} onFinish={handleFormSubmit}>
-                    <Form.Item name="name" label="Tên sản phẩm" rules={[{ required: true }]}>
-                        <Input />
-                    </Form.Item>
-                    <Form.Item name="price" label="Giá" rules={[{ required: true }]}>
-                        <InputNumber min={0} className="w-full" />
-                    </Form.Item>
-                    <Form.Item name="stock" label="Tồn kho" rules={[{ required: true }]}>
-                        <InputNumber min={0} className="w-full" />
-                    </Form.Item>
-                    <Form.Item name="description" label="Mô tả">
-                        <Input.TextArea rows={3} />
-                    </Form.Item>
-                    <Form.Item name="category" label="Danh mục">
-                        <Input />
-                    </Form.Item>
-                    <Form.Item label="Ảnh sản phẩm">
-                        <Upload
-                            listType="picture-card"
-                            showUploadList={false}
-                            beforeUpload={async (file) => {
-                                const base64 = await getBase64(file);
-                                setImageBase64(base64); // Lưu base64 vào state
-                                form.setFieldsValue({ image: base64 }); // Gán vào form
-                                return false; // Ngăn upload tự động
-                            }}
-                        >
-                            {imageBase64 ? (
-                                <img src={imageBase64} alt="preview" style={{ objectFit: "cover" }} />
-                            ) : (
-                                <div>
-                                    <PlusOutlined />
-                                    <div style={{ marginTop: 8 }}>Tải ảnh lên</div>
-                                </div>
-                            )}
-                        </Upload>
-                    </Form.Item>
-                </Form>
+                <Spin spinning={submitting}>
+                    <Form layout="vertical" form={form} onFinish={handleFormSubmit}>
+                        <Form.Item name="name" label="Tên sản phẩm" rules={[{ required: true, message: "Tên sản phẩm là bắt buộc" }]}>
+                            <Input />
+                        </Form.Item>
+                        <Form.Item name="price" label="Giá" rules={[{ required: true, message: "Giá sản phẩm là bắt buộc" }]}>
+                            <InputNumber min={1} className="w-full" />
+                        </Form.Item>
+                        <Form.Item name="stock" label="Tồn kho" rules={[{ required: true, message: "Số lượng sản phẩm là bắt buộc" }]}>
+                            <InputNumber min={1} className="w-full" />
+                        </Form.Item>
+                        <Form.Item name="description" label="Mô tả">
+                            <Input.TextArea rows={3} />
+                        </Form.Item>
+                        <Form.Item name="category" label="Danh mục">
+                            <Input />
+                        </Form.Item>
+                        <Form.Item label="Ảnh sản phẩm" required>
+                            <Upload
+                                listType="picture-card"
+                                showUploadList={false}
+                                beforeUpload={async (file) => {
+                                    const isImage = file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/jpg";
+                                    const isLt2M = file.size / 1024 / 1024 < 2;
+
+                                    if (!isImage) {
+                                        showToast("Chỉ chấp nhận ảnh định dạng JPG/PNG", "error");
+                                        return false;
+                                    }
+
+                                    if (!isLt2M) {
+                                        showToast("Ảnh phải nhỏ hơn 2MB", "error");
+                                        return false;
+                                    }
+
+                                    const base64 = await getBase64(file);
+                                    setImageBase64(base64);
+                                    form.setFieldsValue({ image: base64 });
+                                    return false;
+                                }}
+                            >
+                                {imageBase64 ? (
+                                    <img src={imageBase64} alt="preview" style={{ objectFit: "cover" }} />
+                                ) : (
+                                    <div>
+                                        <PlusOutlined />
+                                        <div style={{ marginTop: 8 }}>Tải ảnh lên</div>
+                                    </div>
+                                )}
+                            </Upload>
+                        </Form.Item>
+                    </Form>
+                </Spin>
             </Modal>
         </div>
     );

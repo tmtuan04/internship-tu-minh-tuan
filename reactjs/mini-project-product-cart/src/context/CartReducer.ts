@@ -1,5 +1,6 @@
 import { CartItem, CartAction } from "../types/cartTypes";
 
+// Tại sao lại JSON.parse(), JSON.parse() được sử dụng để chuyển đổi một chuỗi JSON thành một đối tượng JavaScript
 export const initialState: CartItem[] = JSON.parse(
   localStorage.getItem("cart") || "[]"
 );

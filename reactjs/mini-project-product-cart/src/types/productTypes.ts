@@ -28,3 +28,10 @@ export interface ProductResponse {
     data: Products[],
     pagination: PaginationInfo;
 }
+
+export type ProductQueryParams = {
+  page: number;
+  limit: number;
+  name?: string;
+  category?: string;
+};
