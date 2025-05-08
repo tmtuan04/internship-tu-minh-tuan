@@ -13,7 +13,6 @@ Nội dung chính:
 - Tự động load Cart từ localStorage vào Context khi app khởi động.
 - Khi có thay đổi (add/remove item) phải sync lại localStorage.
 
-
 2. Product Pagination + Search (**Done**)
 - Khi fetch danh sách Product từ API NodeJS backend, phải:
 - Có search theo tên sản phẩm.

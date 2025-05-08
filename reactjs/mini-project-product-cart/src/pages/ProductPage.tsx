@@ -13,6 +13,13 @@ import { Products } from "../types/productTypes";
 import { ProductInput } from "../types/productTypes"
 
 
+/*
+Search: chỉ cập nhật state (search, page) và gọi lại loadProducts(), tức là gửi yêu cầu fetch dữ liệu sản phẩm theo từ khoá tìm kiếm mới. 
+React chỉ re-render lại component chứ không reload trang như hành vi window.location.reload() hoặc form submit kiểu cũ.
+
+✅ Không có hành vi reload trang — chỉ có gọi API và cập nhật dữ liệu hiển thị.
+*/
+
 // Ant Design (antd) cung cấp một component Card, Card có một thuộc tính con gọi là Meta 
 // Dùng để hiển thị thông tin phụ như tiêu đề phụ, mô tả, ảnh đại diện trong card.
 const { Meta } = Card;
@@ -29,7 +36,6 @@ export const ProductPage = () => {
     const [imageBase64, setImageBase64] = useState<string | null>(null);
     const [editingProduct, setEditingProduct] = useState<Products | null>(null);
     const [submitting, setSubmitting] = useState(false);
-
 
     const [form] = Form.useForm();
 
