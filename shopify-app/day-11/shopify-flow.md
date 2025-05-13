@@ -10,13 +10,13 @@
     - Quản lý sản phẩm, đơn hàng, khách hàng 
     - Là trang bán hàng chính thức thức
 
-📌 Dev không cần tạo store – bạn chỉ yêu cầu khách share quyền quản trị (admin) cho bạn để bạn thiết lập
+📌 *Dev không cần tạo store* – bạn chỉ yêu cầu khách share quyền quản trị (admin) cho bạn để bạn thiết lập
 
 🧑‍💻 **Bước 2: Bạn thiết kế website bằng cách custom store**
 - Shopify có sẵn Theme + Page Builder
     - Chọn theme (free hoặc paid)
     - Tùy chỉnh giao diện (drag & drop, CSS, Liquid)
-- Ta giúp khách hàng:
+>- Ta giúp khách hàng:
     - Thêm banner, bố cục, màu sắc
     - Setup menu, trang liên hệ, giới thiệu…
 - **Không cần tạo app nếu khách hàng chỉ cần bán hàng đơn giản**
