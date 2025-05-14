@@ -362,3 +362,8 @@ Khi Shopify redirect lại app sau khi người dùng cài app, URL sẽ có d�
 👉 HMAC ở cuối là chữ ký mà Shopify tạo ra từ các tham số trong URL.
 
 2. Webhooks: Shopify cũng dùng HMAC để ký nội dung webhook, nhưng cách xử lý khác (dùng header).
+
+Bảo mật token
+- Access token phải được lưu an toàn (ví dụ: trong database được mã hóa)
+- Không nên gửi token về phía frontend
+- Shopify access token không hết hạn, nhưng có thể bị revoke nếu app bị gỡ
