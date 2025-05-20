@@ -1,0 +1,36 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "f3b4ab5bb8d5324e2a23b6f325217a81"
+name = "resource-list-button-demo"
+handle = "resource-list-button-demo"
+application_url = "https://below-ent-respect-showing.trycloudflare.com"
+embedded = true
+
+[build]
+include_config_on_deploy = true
+automatically_update_urls_on_dev = true
+
+[webhooks]
+api_version = "2025-04"
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  uri = "/webhooks/app/uninstalled"
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/scopes_update" ]
+  uri = "/webhooks/app/scopes_update"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = [
+  "https://below-ent-respect-showing.trycloudflare.com/auth/callback",
+  "https://below-ent-respect-showing.trycloudflare.com/auth/shopify/callback",
+  "https://below-ent-respect-showing.trycloudflare.com/api/auth/callback"
+]
+
+[pos]
+embedded = false
