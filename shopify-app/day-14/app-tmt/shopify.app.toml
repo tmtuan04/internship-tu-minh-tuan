@@ -3,7 +3,7 @@
 client_id = "266ac2bb7f00c5e29cab0150836fdf10"
 name = "app-tmt"
 handle = "app-tmt"
-application_url = "https://relevance-continental-encoding-conferences.trycloudflare.com"
+application_url = "https://appreciated-later-respect-competitions.trycloudflare.com"
 embedded = true
 
 [build]
@@ -23,13 +23,13 @@ api_version = "2025-04"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products"
+scopes = "write_products, read_orders, write_orders"
 
 [auth]
 redirect_urls = [
-  "https://relevance-continental-encoding-conferences.trycloudflare.com/auth/callback",
-  "https://relevance-continental-encoding-conferences.trycloudflare.com/auth/shopify/callback",
-  "https://relevance-continental-encoding-conferences.trycloudflare.com/api/auth/callback"
+  "https://appreciated-later-respect-competitions.trycloudflare.com/auth/callback",
+  "https://appreciated-later-respect-competitions.trycloudflare.com/auth/shopify/callback",
+  "https://appreciated-later-respect-competitions.trycloudflare.com/api/auth/callback"
 ]
 
 [pos]

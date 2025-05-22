@@ -3,7 +3,7 @@
 client_id = "f3b4ab5bb8d5324e2a23b6f325217a81"
 name = "resource-list-button-demo"
 handle = "resource-list-button-demo"
-application_url = "https://below-ent-respect-showing.trycloudflare.com"
+application_url = "https://garden-win-cottage-winston.trycloudflare.com"
 embedded = true
 
 [build]
@@ -27,9 +27,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://below-ent-respect-showing.trycloudflare.com/auth/callback",
-  "https://below-ent-respect-showing.trycloudflare.com/auth/shopify/callback",
-  "https://below-ent-respect-showing.trycloudflare.com/api/auth/callback"
+  "https://garden-win-cottage-winston.trycloudflare.com/auth/callback",
+  "https://garden-win-cottage-winston.trycloudflare.com/auth/shopify/callback",
+  "https://garden-win-cottage-winston.trycloudflare.com/api/auth/callback"
 ]
 
 [pos]

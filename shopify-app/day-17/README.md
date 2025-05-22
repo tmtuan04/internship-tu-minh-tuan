@@ -24,7 +24,7 @@ Apps built with Shopify App Bridge are more performant (hiệu suất cao), flex
 
 > **Note**: App Bridge components don't render as part of the app's component hierarchy. They are React-like wrappers around JavaScript messages that communicate with the Shopify admin. The Shopify admin does the UI rendering. (Tạm dịch: Các thành phần của App Bridge không được render như một phần của cây component trong ứng dụng của bạn. Chúng là các "wrapper giống React", thực chất là các thông điệp JavaScript giao tiếp với Shopify Admin. Phần hiển thị UI thật sự sẽ do Shopify Admin đảm nhiệm.)
 
-![alt text](image.png)
+![alt text](screenshots/image.png)
 
 App Bridge cho phép bạn thực hiện các việc sau từ trang chủ của ứng dụng:
 
@@ -148,3 +148,13 @@ query GetFilteredProducts($first: Int!, $after: String) {
 - Tạo trang `/admin-products`
 - Call thật Shopify Admin API (GraphQL)
 - Hiển thị danh sách sản phẩm có filter theo title
+
+Project: `admin-products`
+
+Kết quả:
+
+![](screenshots/2.png)
+
+Khi search:
+
+![](screenshots/3.png)

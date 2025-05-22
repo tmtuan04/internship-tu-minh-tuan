@@ -233,7 +233,7 @@ Query GraphQL:
       hasNextPage
     }
   }
-}
+}   
 ```
 
 Giải thích `cursor` và `hasNextPage`:

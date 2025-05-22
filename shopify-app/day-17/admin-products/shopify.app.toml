@@ -3,7 +3,7 @@
 client_id = "5fa71acaf9e3a05742a871bba8acb2c7"
 name = "admin-products"
 handle = "admin-products"
-application_url = "https://annotation-specialist-joining-senators.trycloudflare.com"
+application_url = "https://fw-regards-hang-flag.trycloudflare.com"
 embedded = true
 
 [build]
@@ -27,9 +27,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://annotation-specialist-joining-senators.trycloudflare.com/auth/callback",
-  "https://annotation-specialist-joining-senators.trycloudflare.com/auth/shopify/callback",
-  "https://annotation-specialist-joining-senators.trycloudflare.com/api/auth/callback"
+  "https://fw-regards-hang-flag.trycloudflare.com/auth/callback",
+  "https://fw-regards-hang-flag.trycloudflare.com/auth/shopify/callback",
+  "https://fw-regards-hang-flag.trycloudflare.com/api/auth/callback"
 ]
 
 [pos]
