@@ -1,0 +1,36 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "5fa71acaf9e3a05742a871bba8acb2c7"
+name = "admin-products"
+handle = "admin-products"
+application_url = "https://annotation-specialist-joining-senators.trycloudflare.com"
+embedded = true
+
+[build]
+include_config_on_deploy = true
+automatically_update_urls_on_dev = true
+
+[webhooks]
+api_version = "2025-04"
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/uninstalled" ]
+  uri = "/webhooks/app/uninstalled"
+
+  [[webhooks.subscriptions]]
+  topics = [ "app/scopes_update" ]
+  uri = "/webhooks/app/scopes_update"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = [
+  "https://annotation-specialist-joining-senators.trycloudflare.com/auth/callback",
+  "https://annotation-specialist-joining-senators.trycloudflare.com/auth/shopify/callback",
+  "https://annotation-specialist-joining-senators.trycloudflare.com/api/auth/callback"
+]
+
+[pos]
+embedded = false
